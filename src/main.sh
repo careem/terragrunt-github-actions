@@ -75,11 +75,13 @@ function parseInputs {
   fi
   ssh_private_key=""
   if [ "${INPUT_SSH_PRIVATE_KEY}" != "" ]; then
+    echo "SSH Key found"
     mkdir -p ~/.ssh
     echo "${INPUT_SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa
     chmod 600 ~/.ssh/id_rsa
     ssh-keyscan github.com >> ~/.ssh/known_hosts
   fi
+  printenv
 }
 
 function configureCLICredentials {
