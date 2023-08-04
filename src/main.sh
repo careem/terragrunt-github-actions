@@ -73,6 +73,13 @@ function parseInputs {
   if [ -n "${TF_WORKSPACE}" ]; then
     tfWorkspace="${TF_WORKSPACE}"
   fi
+  ssh_private_key=""
+  if [ "${INPUT_SSH_PRIVATE_KEY}" != "" ]; then
+    mkdir -p ~/.ssh
+    echo "${INPUT_SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa
+    chmod 600 ~/.ssh/id_rsa
+    ssh-keyscan github.com >> ~/.ssh/known_hosts
+  fi
 }
 
 function configureCLICredentials {
