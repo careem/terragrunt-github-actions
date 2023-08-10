@@ -80,6 +80,7 @@ function parseInputs {
     echo "${INPUT_SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa
     chmod 600 ~/.ssh/id_rsa
     ssh-keyscan github.com >> ~/.ssh/known_hosts
+    export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa"
   fi
   printenv
 }
