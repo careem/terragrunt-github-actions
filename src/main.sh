@@ -174,7 +174,7 @@ function main {
   configureCLICredentials
   installTerraform
   cd ${GITHUB_WORKSPACE}/${tfWorkingDir}
-
+  sleep 10000
   case "${tfSubcommand}" in
     fmt)
       installTerragrunt
