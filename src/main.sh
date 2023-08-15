@@ -82,7 +82,11 @@ function parseInputs {
     ssh-keyscan github.com >> ~/.ssh/known_hosts
     export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa"
   fi
-  printenv
+   github_username=""
+   github_token=""
+   if [ "${INPUT_GITHUB_TOKEN}" != "" ]; then
+    git config --global url."https://${INPUT_GITHUB_USERNAME}:${INPUT_GITHUB_TOKEN}@github.com".insteadOf https://github.com
+   fi
 }
 
 function configureCLICredentials {
