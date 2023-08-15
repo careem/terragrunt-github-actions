@@ -36,6 +36,12 @@ inputs:
   ssh_private_key:
     description: 'Private Key for authentication with non-public modules'
     default: ""
+  github-username:
+    description: 'Private Key for authentication with non-public modules'
+    default: ""
+  github-password:
+    description: 'Private Key for authentication with non-public modules'
+    default: ""
 outputs:
   tf_actions_output:
     description: 'The Terragrunt outputs in JSON format.'
