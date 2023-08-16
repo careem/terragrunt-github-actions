@@ -73,6 +73,11 @@ function parseInputs {
   if [ -n "${TF_WORKSPACE}" ]; then
     tfWorkspace="${TF_WORKSPACE}"
   fi
+   github_username=""
+   github_token=""
+   if [ "${INPUT_GITHUB_TOKEN}" != "" ]; then
+    git config --global url."https://${INPUT_GITHUB_USERNAME}:${INPUT_GITHUB_TOKEN}@github.com".insteadOf https://github.com
+   fi
 }
 
 function configureCLICredentials {
@@ -164,7 +169,6 @@ function main {
   configureCLICredentials
   installTerraform
   cd ${GITHUB_WORKSPACE}/${tfWorkingDir}
-
   case "${tfSubcommand}" in
     fmt)
       installTerragrunt
@@ -210,3 +214,4 @@ function main {
 }
 
 main "${*}"
+

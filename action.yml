@@ -33,6 +33,12 @@ inputs:
   tf_actions_fmt_write:
     description: 'Write Terragrunt fmt changes to source files.'
     default: false
+  github_username:
+    description: 'Github username for cloning private repos'
+    default: ""
+  github_token:
+    description: 'Github token for cloning private repos'
+    default: ""
 outputs:
   tf_actions_output:
     description: 'The Terragrunt outputs in JSON format.'
