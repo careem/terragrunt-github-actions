@@ -79,7 +79,7 @@ function parseInputs {
     git config --global url."https://${INPUT_GITHUB_USERNAME}:${INPUT_GITHUB_TOKEN}@github.com".insteadOf https://github.com
    fi
    if [ "${INPUT_TAGS_OVERRIDE}" != null ]; then
-     echo "Tags Are Overriden"
+     echo "Tags Are Overriden New Tags are as below"
      echo "$INPUT_TAGS_OVERRIDE"
      export TF_VAR_tags="$INPUT_TAGS_OVERRIDE"
    fi
