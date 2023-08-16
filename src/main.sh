@@ -78,6 +78,10 @@ function parseInputs {
    if [ "${INPUT_GITHUB_TOKEN}" != "" ]; then
     git config --global url."https://${INPUT_GITHUB_USERNAME}:${INPUT_GITHUB_TOKEN}@github.com".insteadOf https://github.com
    fi
+
+   if [ "${INPUT_TAGS_OVERRIDE}" != "" ]; then
+     export TF_VAR_tags=${INPUT_TAGS_OVERRIDE}
+   fi
 }
 
 function configureCLICredentials {
