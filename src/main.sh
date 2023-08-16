@@ -80,8 +80,9 @@ function parseInputs {
    fi
 
    if [ "${INPUT_TAGS_OVERRIDE}" != "" ]; then
-     echo "${INPUT_TAGS_OVERRIDE}"
-     export TF_VAR_tags="${INPUT_TAGS_OVERRIDE}"
+     echo "Tags Are Overriden"
+     echo "$INPUT_TAGS_OVERRIDE"
+     export TF_VAR_tags="$INPUT_TAGS_OVERRIDE"
    fi
 }
 
