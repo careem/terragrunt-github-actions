@@ -33,9 +33,6 @@ inputs:
   tf_actions_fmt_write:
     description: 'Write Terragrunt fmt changes to source files.'
     default: false
-  ssh_private_key:
-    description: 'Private Key for authentication with non-public modules'
-    default: ""
   github_username:
     description: 'Github username for cloning private repos'
     default: ""
