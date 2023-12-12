@@ -83,15 +83,16 @@ function parseInputs {
      echo "$INPUT_TAGS_OVERRIDE"
      export TF_VAR_tags="$INPUT_TAGS_OVERRIDE"
    fi
-     ssh_private_key=""
-     if [ "${INPUT_SSH_PRIVATE_KEY}" != "" ]; then
-       echo "SSH Key found"
-       mkdir -p ~/.ssh
-       echo "${INPUT_SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa
-       chmod 600 ~/.ssh/id_rsa
-       ssh-keyscan github.com >> ~/.ssh/known_hosts
-       export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa"
-     fi
+   ssh_private_key=""
+   if [ "${INPUT_SSH_PRIVATE_KEY}" != "" ]; then
+     echo "SSH Key found"
+     # mkdir -p ~/.ssh
+     mkdir -p /tmp/.ssh
+     echo "${INPUT_SSH_PRIVATE_KEY}" > /tmp/.ssh/id_rsa #~/.ssh/id_rsa
+     chmod 600 /tmp/.ssh/id_rsa #~/.ssh/id_rsa
+     ssh-keyscan github.com >> /tmp/.ssh/known_hosts #~/.ssh/known_hosts
+     export GIT_SSH_COMMAND="ssh -i /tmp/.ssh/id_rsa"
+   fi
 }
 
 function configureCLICredentials {
