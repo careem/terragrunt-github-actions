@@ -42,6 +42,9 @@ inputs:
   github_token:
     description: 'Github token for cloning private repos'
     default: ""
+  tags_override:
+    description: 'Override terraform "tags" with environment variables. Injecting TF_VAR_tags'
+    default: ""
 outputs:
   tf_actions_output:
     description: 'The Terragrunt outputs in JSON format.'

@@ -73,20 +73,25 @@ function parseInputs {
   if [ -n "${TF_WORKSPACE}" ]; then
     tfWorkspace="${TF_WORKSPACE}"
   fi
-  ssh_private_key=""
-  if [ "${INPUT_SSH_PRIVATE_KEY}" != "" ]; then
-    echo "SSH Key found"
-    mkdir -p ~/.ssh
-    echo "${INPUT_SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa
-    chmod 600 ~/.ssh/id_rsa
-    ssh-keyscan github.com >> ~/.ssh/known_hosts
-    export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa"
-  fi
    github_username=""
    github_token=""
    if [ "${INPUT_GITHUB_TOKEN}" != "" ]; then
     git config --global url."https://${INPUT_GITHUB_USERNAME}:${INPUT_GITHUB_TOKEN}@github.com".insteadOf https://github.com
    fi
+   if [ "${INPUT_TAGS_OVERRIDE}" != null ]; then
+     echo "Tags Are Overriden New Tags are as below"
+     echo "$INPUT_TAGS_OVERRIDE"
+     export TF_VAR_tags="$INPUT_TAGS_OVERRIDE"
+   fi
+     ssh_private_key=""
+     if [ "${INPUT_SSH_PRIVATE_KEY}" != "" ]; then
+       echo "SSH Key found"
+       mkdir -p ~/.ssh
+       echo "${INPUT_SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa
+       chmod 600 ~/.ssh/id_rsa
+       ssh-keyscan github.com >> ~/.ssh/known_hosts
+       export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa"
+     fi
 }
 
 function configureCLICredentials {
@@ -178,7 +183,6 @@ function main {
   configureCLICredentials
   installTerraform
   cd ${GITHUB_WORKSPACE}/${tfWorkingDir}
-#  sleep 10000
   case "${tfSubcommand}" in
     fmt)
       installTerragrunt
