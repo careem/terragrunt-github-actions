@@ -91,7 +91,7 @@ function parseInputs {
      echo "${INPUT_SSH_PRIVATE_KEY}" > /tmp/.ssh/id_rsa #~/.ssh/id_rsa
      chmod 600 /tmp/.ssh/id_rsa #~/.ssh/id_rsa
      ssh-keyscan github.com >> /tmp/.ssh/known_hosts #~/.ssh/known_hosts
-     export GIT_SSH_COMMAND="ssh -i /tmp/.ssh/id_rsa"
+     export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o GlobalKnownHostsFile=/dev/null  -i /tmp/.ssh/id_rsa"
    fi
 }
 
