@@ -59,6 +59,4 @@ runs:
   steps:
     - name: Run main.sh
       shell: bash
-      run: |
-        export INPUT_TF_ACTIONS_VERSION: ${{ inputs.tf_actions_version }}
-        /src/main.sh
+      run: /src/main.sh
