@@ -73,4 +73,4 @@ runs:
         INPUT_GITHUB_USERNAME: ${{ inputs.github_username }}
         INPUT_GITHUB_TOKEN: ${{ inputs.github_token }}
         INPUT_TAGS_OVERRIDE: ${{ inputs.tags_override }}
-      run: /src/main.sh
+      run: ${{ github.action_path }}/src/main.sh
