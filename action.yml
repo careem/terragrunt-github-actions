@@ -59,6 +59,18 @@ runs:
   steps:
     - name: Run main.sh
       shell: bash
-      run: |
-        export INPUT_TF_ACTIONS_VERSION: ${{ inputs.tf_actions_version }}
-        /src/main.sh
+      env: 
+        INPUT_TF_ACTIONS_VERSION: ${{ inputs.tf_actions_version }}
+        INPUT_TF_ACTIONS_SUBCOMMAND: ${{ inputs.tf_actions_subcommand }}
+        INPUT_TF_ACTIONS_BINARY: ${{ inputs.tf_actions_binary }}
+        INPUT_TG_ACTIONS_VERSION: ${{ inputs.tg_actions_version }}
+        INPUT_TF_ACTIONS_CLI_CREDENTIALS_HOSTNAME: ${{ inputs.tf_actions_cli_credentials_hostname }}
+        INPUT_TF_ACTIONS_CLI_CREDENTIALS_TOKEN: ${{ inputs.tf_actions_cli_credentials_token }}
+        INPUT_TF_ACTIONS_COMMENT: ${{ inputs.tf_actions_comment }}
+        INPUT_TF_ACTIONS_WORKING_DIR: ${{ inputs.tf_actions_working_dir }}
+        INPUT_TF_ACTIONS_FMT_WRITE: ${{ inputs.tf_actions_fmt_write }}
+        INPUT_SSH_PRIVATE_KEY: ${{ inputs.ssh_private_key }}
+        INPUT_GITHUB_USERNAME: ${{ inputs.github_username }}
+        INPUT_GITHUB_TOKEN: ${{ inputs.github_token }}
+        INPUT_TAGS_OVERRIDE: ${{ inputs.tags_override }}
+      run: /src/main.sh
