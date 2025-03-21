@@ -116,9 +116,9 @@ function installTerraform {
 
   url="https://releases.hashicorp.com/terraform/${tfVersion}/terraform_${tfVersion}_linux_amd64.zip"
   
-  echo "Cleaning up any existing Terraform download"
-  rm -f /tmp/terraform_${tfVersion}.zip
-  rm -f /usr/local/bin/terraform
+  # echo "Cleaning up any existing Terraform download"
+  # rm -f /tmp/terraform_${tfVersion}.zip
+  # rm -f /usr/local/bin/terraform
   
   echo "Downloading Terraform v${tfVersion}"
   curl -s -S -L -o /tmp/terraform_${tfVersion} ${url}
@@ -192,35 +192,35 @@ function main {
       terragruntFmt ${*}
       ;;
     init)
-      installTerragrunt
+      # installTerragrunt
       terragruntInit ${*}
       ;;
     validate)
-      installTerragrunt
+      # installTerragrunt
       terragruntValidate ${*}
       ;;
     plan)
-      installTerragrunt
+      # installTerragrunt
       terragruntPlan ${*}
       ;;
     apply)
-      installTerragrunt
+      # installTerragrunt
       terragruntApply ${*}
       ;;
     output)
-      installTerragrunt
+      # installTerragrunt
       terragruntOutput ${*}
       ;;
     import)
-      installTerragrunt
+      # installTerragrunt
       terragruntImport ${*}
       ;;
     taint)
-      installTerragrunt
+      # installTerragrunt
       terragruntTaint ${*}
       ;;
     destroy)
-      installTerragrunt
+      # installTerragrunt
       terragruntDestroy ${*}
       ;;
     *)
