@@ -184,7 +184,7 @@ function main {
 
   parseInputs
   configureCLICredentials
-  installTerraform
+  #installTerraform
   cd ${GITHUB_WORKSPACE}/${tfWorkingDir}
   case "${tfSubcommand}" in
     fmt)
