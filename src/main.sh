@@ -113,20 +113,13 @@ function installTerraform {
       exit 1
     fi
   fi
-  #checking if terraform exist then skip
-  if command -v terraform &> /dev/null; then
-    currentVersion=$(terraform version -json | jq -r '.terraform_version')
-    if [[ "${currentVersion}" == "${tfVersion}" ]]; then
-      echo "Terraform v${tfVersion} is already installed. Skipping installation."
-      return
-    fi
-  fi
+
+  echo "Cleaning up any existing Terraform download"
+  rm -f /tmp/terraform_${tfVersion}.zip
+  rm -f /usr/local/bin/terraform
+  
   url="https://releases.hashicorp.com/terraform/${tfVersion}/terraform_${tfVersion}_linux_amd64.zip"
-  
-  # echo "Cleaning up any existing Terraform download"
-  # rm -f /tmp/terraform_${tfVersion}.zip
-  # rm -f /usr/local/bin/terraform
-  
+
   echo "Downloading Terraform v${tfVersion}"
   curl -s -S -L -o /tmp/terraform_${tfVersion} ${url}
   if [ "${?}" -ne 0 ]; then
@@ -153,14 +146,6 @@ function installTerragrunt {
     if [[ -z "${tgVersion}" ]]; then
       echo "Failed to fetch the latest version"
       exit 1
-    fi
-  fi
-  #checking if terragrunt exist then skip
-  if command -v terragrunt &> /dev/null; then
-    currentVersion=$(terragrunt --version | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
-    if [[ "${currentVersion}" == "${tgVersion}" ]]; then
-      echo "Terragrunt ${tgVersion} is already installed. Skipping installation."
-      return
     fi
   fi
 
@@ -207,35 +192,35 @@ function main {
       terragruntFmt ${*}
       ;;
     init)
-      # installTerragrunt
+      installTerragrunt
       terragruntInit ${*}
       ;;
     validate)
-      # installTerragrunt
+      installTerragrunt
       terragruntValidate ${*}
       ;;
     plan)
-      # installTerragrunt
+      installTerragrunt
       terragruntPlan ${*}
       ;;
     apply)
-      # installTerragrunt
+      installTerragrunt
       terragruntApply ${*}
       ;;
     output)
-      # installTerragrunt
+      installTerragrunt
       terragruntOutput ${*}
       ;;
     import)
-      # installTerragrunt
+      installTerragrunt
       terragruntImport ${*}
       ;;
     taint)
-      # installTerragrunt
+      installTerragrunt
       terragruntTaint ${*}
       ;;
     destroy)
-      # installTerragrunt
+      installTerragrunt
       terragruntDestroy ${*}
       ;;
     *)
