@@ -192,7 +192,7 @@ function main {
       terragruntInit ${*}
       ;;
     validate)
-      installTerragrunt
+      # installTerragrunt
       terragruntValidate ${*}
       ;;
     plan)
