@@ -188,6 +188,7 @@ function main {
   cd ${GITHUB_WORKSPACE}/${tfWorkingDir}
   case "${tfSubcommand}" in
     fmt)
+      installTerraform
       installTerragrunt
       terragruntFmt ${*}
       ;;
