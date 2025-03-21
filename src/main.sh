@@ -115,7 +115,7 @@ function installTerraform {
   fi
 
   url="https://releases.hashicorp.com/terraform/${tfVersion}/terraform_${tfVersion}_linux_amd64.zip"
-
+    
   echo "Downloading Terraform v${tfVersion}"
   curl -s -S -L -o /tmp/terraform_${tfVersion} ${url}
   if [ "${?}" -ne 0 ]; then
@@ -131,6 +131,10 @@ function installTerraform {
     exit 1
   fi
   echo "Successfully unzipped Terraform v${tfVersion}"
+  
+  echo "Cleaning up any existing Terraform download"
+  rm -f /tmp/terraform_${tfVersion}
+  rm -f /usr/local/bin/terraform_${tfVersion}
 }
 
 function installTerragrunt {
@@ -227,3 +231,4 @@ function main {
 }
 
 main "${*}"
+
