@@ -113,7 +113,14 @@ function installTerraform {
       exit 1
     fi
   fi
-
+  #checking if terraform exist then skip
+  if command -v terraform &> /dev/null; then
+    currentVersion=$(terraform version -json | jq -r '.terraform_version')
+    if [[ "${currentVersion}" == "${tfVersion}" ]]; then
+      echo "Terraform v${tfVersion} is already installed. Skipping installation."
+      return
+    fi
+  fi
   url="https://releases.hashicorp.com/terraform/${tfVersion}/terraform_${tfVersion}_linux_amd64.zip"
   
   # echo "Cleaning up any existing Terraform download"
@@ -146,6 +153,14 @@ function installTerragrunt {
     if [[ -z "${tgVersion}" ]]; then
       echo "Failed to fetch the latest version"
       exit 1
+    fi
+  fi
+  #checking if terragrunt exist then skip
+  if command -v terragrunt &> /dev/null; then
+    currentVersion=$(terragrunt --version | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
+    if [[ "${currentVersion}" == "${tgVersion}" ]]; then
+      echo "Terragrunt ${tgVersion} is already installed. Skipping installation."
+      return
     fi
   fi
 
@@ -184,11 +199,10 @@ function main {
 
   parseInputs
   configureCLICredentials
-  #installTerraform
+  installTerraform
   cd ${GITHUB_WORKSPACE}/${tfWorkingDir}
   case "${tfSubcommand}" in
     fmt)
-      installTerraform
       installTerragrunt
       terragruntFmt ${*}
       ;;
