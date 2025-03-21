@@ -117,7 +117,7 @@ function installTerraform {
   url="https://releases.hashicorp.com/terraform/${tfVersion}/terraform_${tfVersion}_linux_amd64.zip"
   
   echo "Cleaning up any existing Terraform download"
-  rm -f /tmp/terraform_${tfVersion}.zip
+  rm -f /tmp/terraform_${tfVersion}
   rm -f /usr/local/bin/terraform
   
   echo "Downloading Terraform v${tfVersion}"
